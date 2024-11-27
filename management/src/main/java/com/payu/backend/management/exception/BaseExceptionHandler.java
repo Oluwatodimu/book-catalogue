@@ -38,6 +38,14 @@ public class BaseExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new BaseResponse(validationErrors.toString(), true, null), HttpStatus.BAD_REQUEST);
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<BaseResponse> handleNotFoundException(NotFoundException ex) {
+        return new ResponseEntity<>(
+                new BaseResponse((ex.getMessage() != null) ? ex.getMessage() : "Resource not found", true, null),
+                HttpStatus.NOT_FOUND);
+    }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({Exception.class, RuntimeException.class})
     public ResponseEntity<BaseResponse> handleAllExceptions(Exception ex) {
