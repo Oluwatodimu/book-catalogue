@@ -1,0 +1,12 @@
+services:
+  management:
+    image: "todimuisewon/management:v1"
+    container_name: "management-service"
+    ports:
+      - "8080:8080"
+    networks:
+      - payu-network
+
+networks:
+  payu-network:
+    driver: "bridge"
