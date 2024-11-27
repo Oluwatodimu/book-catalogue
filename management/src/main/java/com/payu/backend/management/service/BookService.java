@@ -3,8 +3,8 @@ package com.payu.backend.management.service;
 import com.payu.backend.management.data.dto.request.AddBookRequest;
 import com.payu.backend.management.data.dto.request.UpdateBookRequest;
 import com.payu.backend.management.data.entity.Book;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface BookService {
 
@@ -13,7 +13,7 @@ public interface BookService {
      * @Parameter: Pageable
      * @Returns: paginated list of books in the catalogue
      * */
-    Page<Book> listAllBooksInCatalogue(Pageable pageable);
+    List<Book> listAllBooksInCatalogue();
 
     /**
      * method for updating ook in the collection

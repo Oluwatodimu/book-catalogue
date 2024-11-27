@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Validated
@@ -28,13 +29,9 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> listAllBooks(
-            @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer size) {
-
+    public ResponseEntity<BaseResponse> listAllBooks() {
         log.info("retrieving books in the catalogue ...");
-        Pageable pageable = PaginationUtils.createSortedPageableObject(page, size);
-        Page<Book> books = bookService.listAllBooksInCatalogue(pageable);
+        List<Book> books = bookService.listAllBooksInCatalogue();
         return new ResponseEntity<>(new BaseResponse("successful", false, books), HttpStatus.OK);
     }
 

@@ -10,12 +10,11 @@ import com.payu.backend.management.service.BookService;
 import com.payu.backend.management.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -27,8 +26,8 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    public Page<Book> listAllBooksInCatalogue(Pageable pageable) {
-        return bookRepository.findAll(pageable);
+    public List<Book> listAllBooksInCatalogue() {
+        return bookRepository.findAll();
     }
 
     @Override

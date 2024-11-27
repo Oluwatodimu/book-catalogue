@@ -15,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +53,11 @@ class BookServiceImplTests {
     public void givenPageable_WhenListAllBooksInCatalogue_ThenReturnPageable() {
         List<Book> books = new ArrayList<>();
         books.add(MockedBookData.createMockDataForBook());
-        Pageable pageable = PageRequest.of(1, 1);
-        BDDMockito.given(bookServiceImpl.listAllBooksInCatalogue(pageable)).willReturn(new PageImpl<>(books, pageable, books.size()));
+        BDDMockito.given(bookServiceImpl.listAllBooksInCatalogue()).willReturn(books);
 
-        Page<Book> booksPage = bookServiceImpl.listAllBooksInCatalogue(pageable);
-        Mockito.verify(bookRepository, Mockito.times(1)).findAll(pageable);
-        Assertions.assertEquals(1, booksPage.getContent().size());
+        List<Book> booksList = bookServiceImpl.listAllBooksInCatalogue();
+        Mockito.verify(bookRepository, Mockito.times(1)).findAll();
+        Assertions.assertEquals(1,booksList.size());
     }
 
     @Test
