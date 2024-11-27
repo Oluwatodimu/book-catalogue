@@ -4,6 +4,25 @@ services:
     container_name: "management-service"
     ports:
       - "8080:8080"
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health | grep OK || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - payu-network
+
+  web-client:
+    image: "payu/web-client:v1"
+    container_name: "web-service"
+    ports:
+      - "8090:8090"
+    depends_on:
+      backend-server:
+        condition: service_healthy
+    environment:
+      MANAGEMENT_BASE_URL: http://backend-server:8080
     networks:
       - payu-network
 
