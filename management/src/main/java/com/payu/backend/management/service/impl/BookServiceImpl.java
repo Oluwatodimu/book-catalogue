@@ -24,10 +24,12 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    @Override
     public Page<Book> listAllBooksInCatalogue(Pageable pageable) {
         return bookRepository.findAll(pageable);
     }
 
+    @Override
     @Transactional
     public Book addNewBookToCatalogue(AddBookRequest request) {
         if (bookRepository.existsByIsbnNumber(request.getIsbnNumber())) {
@@ -49,6 +51,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(newBook);
     }
 
+    @Override
     @Transactional
     public Book updateBookInCatalogue(String isbn, UpdateBookRequest request) {
         return Optional.ofNullable(bookRepository.findByIsbnNumber(isbn))
@@ -58,6 +61,7 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(() -> new NotFoundException(String.format("Book with isbn %s does not exist", isbn)));
     }
 
+    @Override
     public void deleteBookFromCatalogue(String isbn) {
         Book existingBook = bookRepository.findByIsbnNumber(isbn)
                 .orElseThrow(() -> new NotFoundException(String.format("Book with isbn %s does not exist", isbn)));
