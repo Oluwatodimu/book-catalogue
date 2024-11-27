@@ -71,6 +71,12 @@ public class BookServiceImpl implements BookService {
         log.info("book with isbn: {} has been completed.", isbn);
     }
 
+    @Override
+    public Book findByIsbnNumber(String isbn) {
+        return bookRepository.findByIsbnNumber(isbn)
+                .orElseThrow(() -> new NotFoundException(String.format("book with isbn number: %s not found", isbn)));
+    }
+
     private Book updateBook(Book existingBook, UpdateBookRequest request) {
         if (request.getName() != null) {
             existingBook.setName(request.getName());
@@ -99,5 +105,4 @@ public class BookServiceImpl implements BookService {
         existingBook.setLastModifiedAt(Instant.now());
         return existingBook;
     }
-
 }

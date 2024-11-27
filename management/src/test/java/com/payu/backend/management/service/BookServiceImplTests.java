@@ -103,4 +103,21 @@ class BookServiceImplTests {
         Assertions.assertThrows(NotFoundException.class, () -> bookServiceImpl.updateBookInCatalogue(mockedBook.getIsbnNumber(), mockRequest));
         Mockito.verify(bookRepository, Mockito.times(0)).save(mockedBook);
     }
+
+    @Test
+    public void givenIsbn_WhenFindByIsbnNumber_ThenReturnBookSuccessfully() {
+        Book mockedBook = MockedBookData.createMockDataForBook();
+        BDDMockito.given(bookRepository.findByIsbnNumber(mockedBook.getIsbnNumber())).willReturn(Optional.of(mockedBook));
+        Book book = bookServiceImpl.findByIsbnNumber(mockedBook.getIsbnNumber());
+        Mockito.verify(bookRepository, Mockito.times(1)).findByIsbnNumber(mockedBook.getIsbnNumber());
+        Assertions.assertEquals(mockedBook.getIsbnNumber(), book.getIsbnNumber());
+    }
+
+    @Test
+    public void givenWrongIsbn_WhenFindByIsbnNumber_ThenReturnNotFoundException() {
+        Book mockedBook = MockedBookData.createMockDataForBook();
+        BDDMockito.given(bookRepository.findByIsbnNumber(mockedBook.getIsbnNumber())).willReturn(Optional.empty());
+        Assertions.assertThrows(NotFoundException.class, () -> bookServiceImpl.findByIsbnNumber(mockedBook.getIsbnNumber()));
+        Mockito.verify(bookRepository, Mockito.times(1)).findByIsbnNumber(Mockito.anyString());
+    }
 }

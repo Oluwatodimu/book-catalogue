@@ -36,4 +36,6 @@ public interface BookService {
      * @Parameter: isbn unique to the book
      * */
     void deleteBookFromCatalogue(String isbn);
+
+    Book findByIsbnNumber(String isbn);
 }
