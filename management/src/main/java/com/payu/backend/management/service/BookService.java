@@ -37,5 +37,10 @@ public interface BookService {
      * */
     void deleteBookFromCatalogue(String isbn);
 
+    /**
+     * method for fetching book details from the collection
+     * @Parameter: isbn unique to the book
+     * @Returns: book entity
+     * */
     Book findByIsbnNumber(String isbn);
 }
