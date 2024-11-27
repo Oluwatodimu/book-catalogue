@@ -1,6 +1,6 @@
 services:
-  management:
-    image: "todimuisewon/management:v1"
+  backend-server:
+    image: "payu/management-api:v1"
     container_name: "management-service"
     ports:
       - "8080:8080"
