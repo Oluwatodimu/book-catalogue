@@ -9,6 +9,7 @@ import com.payu.backend.management.repository.BookRepository;
 import com.payu.backend.management.service.BookService;
 import com.payu.backend.management.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.time.Instant;
 import java.util.Locale;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
@@ -66,6 +68,7 @@ public class BookServiceImpl implements BookService {
         Book existingBook = bookRepository.findByIsbnNumber(isbn)
                 .orElseThrow(() -> new NotFoundException(String.format("Book with isbn %s does not exist", isbn)));
         bookRepository.deleteById(existingBook.getId());
+        log.info("book with isbn: {} has been completed.", isbn);
     }
 
     private Book updateBook(Book existingBook, UpdateBookRequest request) {

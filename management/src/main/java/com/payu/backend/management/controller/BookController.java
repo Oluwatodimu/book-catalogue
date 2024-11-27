@@ -55,7 +55,7 @@ public class BookController {
         return new ResponseEntity<>(new BaseResponse("successful", false, book), HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/{isbn}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/{isbn}")
     public ResponseEntity<BaseResponse> deleteCurrentBook(@PathVariable(name = "isbn") String isbn) {
         log.info("deleting book with isbn number: {}", isbn);
         bookService.deleteBookFromCatalogue(isbn);
