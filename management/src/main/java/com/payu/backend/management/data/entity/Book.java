@@ -1,5 +1,6 @@
 package com.payu.backend.management.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.payu.backend.management.data.enums.BookType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,9 +58,11 @@ public class Book implements Serializable {
     @Column(name = "number_of_pages")
     private Long numberOfPages;
 
+    @JsonIgnore
     @Column(name = "created_at")
     private Instant createdAt;
 
+    @JsonIgnore
     @Column(name = "last_modified_at")
     private Instant lastModifiedAt;
 

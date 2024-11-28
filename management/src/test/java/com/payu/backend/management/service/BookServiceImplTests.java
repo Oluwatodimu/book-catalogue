@@ -79,10 +79,9 @@ class BookServiceImplTests {
     @Test
     public void givenUpdateBookRequestAndIsbn_whenUpdateBookInCatalogue_Then_SuccessfullyUpdate() {
         Book mockedBook = MockedBookData.createMockDataForBook();
-        UpdateBookRequest mockRequest = MockedBookData.createMockDataForUpdatingBook();
         BDDMockito.given(bookRepository.findByIsbnNumber(mockedBook.getIsbnNumber())).willReturn(Optional.of(mockedBook));
         BDDMockito.given(bookRepository.save(mockedBook)).willReturn(mockedBook);
-        Book book = bookServiceImpl.updateBookInCatalogue(mockedBook.getIsbnNumber(), mockRequest);
+        Book book = bookServiceImpl.updateBookInCatalogue(mockedBook);
         Mockito.verify(bookRepository, Mockito.times(1)).findByIsbnNumber(mockedBook.getIsbnNumber());
         Mockito.verify(bookRepository, Mockito.times(1)).save(mockedBook);
         Assertions.assertEquals(book.getName(), mockedBook.getName());
@@ -97,7 +96,7 @@ class BookServiceImplTests {
         Book mockedBook = MockedBookData.createMockDataForBook();
         UpdateBookRequest mockRequest = MockedBookData.createMockDataForUpdatingBook();
         BDDMockito.given(bookRepository.findByIsbnNumber(mockedBook.getIsbnNumber())).willReturn(Optional.empty());
-        Assertions.assertThrows(NotFoundException.class, () -> bookServiceImpl.updateBookInCatalogue(mockedBook.getIsbnNumber(), mockRequest));
+        Assertions.assertThrows(NotFoundException.class, () -> bookServiceImpl.updateBookInCatalogue(mockedBook));
         Mockito.verify(bookRepository, Mockito.times(0)).save(mockedBook);
     }
 

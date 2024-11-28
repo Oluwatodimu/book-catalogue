@@ -61,13 +61,12 @@ public class ManagementService {
         }
     }
 
-    public BaseResponse editExistingBook(String isbn, UpdateBookRequest request) {
+    public BaseResponse editExistingBook(Book book) {
         try {
 
             Response response = client.target(baseUrl)
-                    .path(isbn)
                     .request(MediaType.APPLICATION_JSON_VALUE)
-                    .put(Entity.entity(request, javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE));
+                    .put(Entity.entity(book, javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE));
             return response.readEntity(BaseResponse.class);
 
         } catch (Exception e) {

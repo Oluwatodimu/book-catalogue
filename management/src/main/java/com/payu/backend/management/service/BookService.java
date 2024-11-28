@@ -29,7 +29,7 @@ public interface BookService {
      * @Parameter: isbn unique to the book
      * @Returns: info regarding the updated book
      * */
-    Book updateBookInCatalogue(String isbn, UpdateBookRequest request);
+    Book updateBookInCatalogue(Book book);
 
     /**
      * method for deleting book from the collection

@@ -38,21 +38,19 @@ public class BookController {
         return new ResponseEntity<>(new BaseResponse("successful", false, book), HttpStatus.OK);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse> addNewBook(@Valid @RequestBody Book book) {
         log.info("adding book with isbn: {} to collection", book.getIsbnNumber());
         Book newBook = bookService.addNewBookToCatalogue(book);
         return new ResponseEntity<>(new BaseResponse("successful", false, newBook), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/{isbn}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> editExistingBook(
-            @PathVariable(name = "isbn") String isbn,
-            @Valid @RequestBody UpdateBookRequest request) {
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse> editExistingBook(@Valid @RequestBody Book book) {
 
-        log.info("updating book with isbn number: {}", isbn);
-        Book book = bookService.updateBookInCatalogue(isbn, request);
-        return new ResponseEntity<>(new BaseResponse("successful", false, book), HttpStatus.OK);
+        log.info("updating book with isbn number: {}", book.getIsbnNumber());
+        Book updatedBook = bookService.updateBookInCatalogue(book);
+        return new ResponseEntity<>(new BaseResponse("successful", false, updatedBook), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{isbn}")
