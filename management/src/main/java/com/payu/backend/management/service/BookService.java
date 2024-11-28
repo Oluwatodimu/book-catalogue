@@ -1,6 +1,7 @@
 package com.payu.backend.management.service;
 
 import com.payu.backend.management.data.entity.Book;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -41,4 +42,6 @@ public interface BookService {
      * @Returns: book entity
      * */
     Book findByIsbnNumber(String isbn);
+
+    Page<Book> getPaginatedList(int page, int size);
 }

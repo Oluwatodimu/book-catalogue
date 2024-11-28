@@ -7,6 +7,9 @@ import com.payu.backend.management.repository.BookRepository;
 import com.payu.backend.management.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,5 +72,11 @@ public class BookServiceImpl implements BookService {
     public Book findByIsbnNumber(String isbn) {
         return bookRepository.findByIsbnNumber(isbn)
                 .orElseThrow(() -> new NotFoundException(String.format("book with isbn number: %s not found", isbn)));
+    }
+
+    @Override
+    public Page<Book> getPaginatedList(int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return bookRepository.findAll(pageable);
     }
 }

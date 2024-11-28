@@ -14,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,5 +113,12 @@ class BookServiceImplTests {
         BDDMockito.given(bookRepository.findByIsbnNumber(mockedBook.getIsbnNumber())).willReturn(Optional.empty());
         Assertions.assertThrows(NotFoundException.class, () -> bookServiceImpl.findByIsbnNumber(mockedBook.getIsbnNumber()));
         Mockito.verify(bookRepository, Mockito.times(1)).findByIsbnNumber(Mockito.anyString());
+    }
+
+    @Test
+    public void givenPageNumberAndPageSize_whenGetPaginatedList_thenReturnPage() {
+        BDDMockito.given(bookRepository.findAll(Mockito.any(Pageable.class))).willReturn(Mockito.any(Page.class));
+        bookServiceImpl.getPaginatedList(1, 5);
+        Mockito.verify(bookRepository, Mockito.times(1)).findAll(Mockito.any(Pageable.class));
     }
 }

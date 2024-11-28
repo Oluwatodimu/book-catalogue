@@ -86,4 +86,18 @@ public class ManagementService {
             throw new RuntimeException(e);
         }
     }
+
+    public BaseResponse getPaginatedList(int pageNumber) {
+        try {
+
+            Response response = client.target(baseUrl)
+                    .path("page/" + pageNumber)
+                    .request(MediaType.APPLICATION_JSON_VALUE)
+                    .get();
+            return response.readEntity(BaseResponse.class);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

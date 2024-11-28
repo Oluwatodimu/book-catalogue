@@ -1,8 +1,9 @@
 package com.payu.web.client.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.payu.web.client.data.Book;
 import com.payu.web.client.data.BaseResponse;
+import com.payu.web.client.data.Book;
+import com.payu.web.client.data.dto.PaginatedBookList;
 import com.payu.web.client.service.ManagementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -27,9 +26,7 @@ public class BookClientController {
     @GetMapping(path = "/")
     public String listAllBooks(Model model) {
         log.info("retrieving all books in catalogue");
-        List<Book> books = (List<Book>) managementService.listAllBooks().getData();
-        model.addAttribute("bookList", books);
-        return "index";
+        return getPaginatedList(1, model);
     }
 
     @GetMapping(path = "/show-new-book-form")
@@ -87,5 +84,20 @@ public class BookClientController {
 
         attributes.addFlashAttribute("message", "successfully removed book from catalogue");
         return "redirect:/";
+    }
+
+    @GetMapping("/page/{page-number}")
+    public String getPaginatedList(@PathVariable(name = "page-number") int pageNumber, Model model) {
+        log.info("retrieving paginated list of books in catalogue");
+        BaseResponse response = managementService.getPaginatedList(pageNumber);
+        PaginatedBookList bookList = objectMapper.convertValue(response.getData(), PaginatedBookList.class);
+
+
+        System.out.println("here");
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", bookList.getTotalPages());
+        model.addAttribute("totalItems", bookList.getTotalElements());
+        model.addAttribute("bookList", bookList.getContent());
+        return "index";
     }
 }

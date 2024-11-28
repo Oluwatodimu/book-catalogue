@@ -5,6 +5,7 @@ import com.payu.backend.management.data.entity.Book;
 import com.payu.backend.management.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +58,13 @@ public class BookController {
         log.info("deleting book with isbn number: {}", isbn);
         bookService.deleteBookFromCatalogue(isbn);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(path = "/page/{page-number}")
+    public ResponseEntity<BaseResponse> getPaginatedList(@PathVariable(name = "page-number") int number) {
+        int pageSize = 5;
+        log.info("retrieving paginated book list in the catalogue ...");
+        Page<Book> books = bookService.getPaginatedList(number, pageSize);
+        return new ResponseEntity<>(new BaseResponse("successful", false, books), HttpStatus.OK);
     }
 }
