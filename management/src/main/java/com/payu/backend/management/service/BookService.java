@@ -9,7 +9,6 @@ public interface BookService {
 
     /**
      * method for getting all books in the catalogue
-     * @Parameter: Pageable
      * @Returns: paginated list of books in the catalogue
      * */
     List<Book> listAllBooksInCatalogue();
@@ -43,5 +42,11 @@ public interface BookService {
      * */
     Book findByIsbnNumber(String isbn);
 
+    /**
+     * method for getting all books (paginated) in the catalogue
+     * @Parameter: page -> page number
+     * @Parameter: size -> page size
+     * @Returns: paginated list of books in the catalogue
+     * */
     Page<Book> getPaginatedList(int page, int size);
 }

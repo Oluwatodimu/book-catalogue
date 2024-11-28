@@ -10,10 +10,10 @@ RUN apt-get update && \
 # add the application's jar to the image
 COPY target/client-0.0.1-SNAPSHOT.jar /app/client-0.0.1-SNAPSHOT.jar
 
-# Set the working directory (optional but good practice)
+# Set the working directory
 WORKDIR /app
 
-# Expose the default port for the application (if needed, adjust to your app's port)
+# Expose the default port for the application
 EXPOSE 8090
 
 # execute the application

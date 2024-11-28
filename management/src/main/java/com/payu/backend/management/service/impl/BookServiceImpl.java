@@ -46,16 +46,16 @@ public class BookServiceImpl implements BookService {
     public Book updateBookInCatalogue(Book book) {
         return Optional.ofNullable(bookRepository.findByIsbnNumber(book.getIsbnNumber()))
                 .filter(Optional::isPresent)  // Ensure the book exists
-                .map(existingBook -> {
-                    Book existing = existingBook.get();
-                    existing.setName(book.getName());
-                    existing.setPublishDate(book.getPublishDate());
-                    existing.setPrice(book.getPrice());
-                    existing.setBookType(book.getBookType());
-                    existing.setAuthor(book.getAuthor());
-                    existing.setNumberOfPages(book.getNumberOfPages());
-                    existing.setLastModifiedAt(Instant.now());
-                    return bookRepository.save(existing);
+                .map(existingBookOptional -> {
+                    Book existingBook = existingBookOptional.get();
+                    existingBook.setName(book.getName());
+                    existingBook.setPublishDate(book.getPublishDate());
+                    existingBook.setPrice(book.getPrice());
+                    existingBook.setBookType(book.getBookType());
+                    existingBook.setAuthor(book.getAuthor());
+                    existingBook.setNumberOfPages(book.getNumberOfPages());
+                    existingBook.setLastModifiedAt(Instant.now());
+                    return bookRepository.save(existingBook);
                 })
                 .orElseThrow(() -> new NotFoundException(String.format("Book with ISBN %s does not exist", book.getIsbnNumber())));
     }

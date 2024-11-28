@@ -10,10 +10,10 @@ RUN apt-get update && \
 # add the application's jar to the image
 COPY target/management-0.0.1-SNAPSHOT.jar /app/management-0.0.1-SNAPSHOT.jar
 
-# Set the working directory (optional but good practice)
+# Set the working directory
 WORKDIR /app
 
-# Expose the default port for the application (if needed, adjust to your app's port)
+# Expose the default port for the application
 EXPOSE 8080
 
 # execute the application

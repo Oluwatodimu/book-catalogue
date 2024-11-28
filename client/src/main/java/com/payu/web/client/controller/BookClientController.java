@@ -82,7 +82,6 @@ public class BookClientController {
             return "redirect:/";
         }
 
-        attributes.addFlashAttribute("message", "successfully removed book from catalogue");
         return "redirect:/";
     }
 
@@ -91,9 +90,6 @@ public class BookClientController {
         log.info("retrieving paginated list of books in catalogue");
         BaseResponse response = managementService.getPaginatedList(pageNumber);
         PaginatedBookList bookList = objectMapper.convertValue(response.getData(), PaginatedBookList.class);
-
-
-        System.out.println("here");
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", bookList.getTotalPages());
         model.addAttribute("totalItems", bookList.getTotalElements());

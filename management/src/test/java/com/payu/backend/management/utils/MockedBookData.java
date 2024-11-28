@@ -4,8 +4,6 @@ package com.payu.backend.management.utils;
 import com.payu.backend.management.data.entity.Book;
 import com.payu.backend.management.data.enums.BookType;
 
-import java.time.LocalDate;
-
 public class MockedBookData {
 
     public static Book createMockDataForBook() {

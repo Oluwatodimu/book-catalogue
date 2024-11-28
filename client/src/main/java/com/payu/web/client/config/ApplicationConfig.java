@@ -9,7 +9,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 @Configuration
-public class ClientConfig {
+public class ApplicationConfig {
 
     @Bean
     public Client client() {

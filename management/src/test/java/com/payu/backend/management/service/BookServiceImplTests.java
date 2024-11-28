@@ -32,8 +32,7 @@ class BookServiceImplTests {
         Book mockedBook = MockedBookData.createMockDataForBook();
         BDDMockito.given(bookRepository.existsByIsbnNumber(Mockito.anyString())).willReturn(false);
         BDDMockito.given(bookRepository.save(Mockito.any(Book.class))).willReturn(MockedBookData.createMockDataForBook());
-
-        Book newBook = bookServiceImpl.addNewBookToCatalogue(mockedBook);
+        bookServiceImpl.addNewBookToCatalogue(mockedBook);
         Mockito.verify(bookRepository, Mockito.times(1)).existsByIsbnNumber(Mockito.anyString());
         Mockito.verify(bookRepository, Mockito.times(1)).save(Mockito.any(Book.class));
 
