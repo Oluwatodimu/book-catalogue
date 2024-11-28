@@ -1,11 +1,10 @@
-package com.payu.web.client.data;
+package com.payu.web.client.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.payu.web.client.data.enums.BookType;
 import lombok.Data;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -1,4 +1,4 @@
-package com.payu.web.client.data;
+package com.payu.backend.management.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

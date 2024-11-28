@@ -2,7 +2,6 @@ package com.payu.web.client.data.dto;
 
 import java.util.List;
 
-import com.payu.web.client.data.Book;
 import lombok.Data;
 
 @Data

@@ -1,8 +1,8 @@
 package com.payu.web.client.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.payu.web.client.data.BaseResponse;
-import com.payu.web.client.data.Book;
+import com.payu.web.client.data.dto.BaseResponse;
+import com.payu.web.client.data.dto.Book;
 import com.payu.web.client.data.dto.PaginatedBookList;
 import com.payu.web.client.service.ManagementService;
 import lombok.RequiredArgsConstructor;

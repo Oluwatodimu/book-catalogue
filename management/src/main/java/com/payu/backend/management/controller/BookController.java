@@ -1,10 +1,11 @@
 package com.payu.backend.management.controller;
 
-import com.payu.backend.management.data.BaseResponse;
+import com.payu.backend.management.data.dto.BaseResponse;
 import com.payu.backend.management.data.entity.Book;
 import com.payu.backend.management.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +22,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1/books")
 public class BookController {
+
+    @Value("${pagination.page-size}")
+    private int pageSize;
 
     private final BookService bookService;
 
@@ -47,7 +51,6 @@ public class BookController {
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse> editExistingBook(@Valid @RequestBody Book book) {
-
         log.info("updating book with isbn number: {}", book.getIsbnNumber());
         Book updatedBook = bookService.updateBookInCatalogue(book);
         return new ResponseEntity<>(new BaseResponse("successful", false, updatedBook), HttpStatus.OK);
@@ -62,7 +65,6 @@ public class BookController {
 
     @GetMapping(path = "/page/{page-number}")
     public ResponseEntity<BaseResponse> getPaginatedList(@PathVariable(name = "page-number") int number) {
-        int pageSize = 5;
         log.info("retrieving paginated book list in the catalogue ...");
         Page<Book> books = bookService.getPaginatedList(number, pageSize);
         return new ResponseEntity<>(new BaseResponse("successful", false, books), HttpStatus.OK);

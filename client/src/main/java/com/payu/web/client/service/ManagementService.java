@@ -1,7 +1,7 @@
 package com.payu.web.client.service;
 
-import com.payu.web.client.data.Book;
-import com.payu.web.client.data.BaseResponse;
+import com.payu.web.client.data.dto.Book;
+import com.payu.web.client.data.dto.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;

@@ -1,6 +1,6 @@
 package com.payu.backend.management.exception;
 
-import com.payu.backend.management.data.BaseResponse;
+import com.payu.backend.management.data.dto.BaseResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

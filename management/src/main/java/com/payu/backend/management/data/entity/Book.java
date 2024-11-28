@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,6 +33,7 @@ public class Book implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Length(min = 5, max = 15, message = "isbn should be between 5 and 15 characters")
     @NotNull(message = "isbn cannot be null")
     @Column(name = "isbn_number")
     private String isbnNumber;
