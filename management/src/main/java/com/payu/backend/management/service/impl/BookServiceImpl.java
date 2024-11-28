@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookService {
         Book existingBook = bookRepository.findByIsbnNumber(isbn)
                 .orElseThrow(() -> new NotFoundException(String.format("Book with isbn %s does not exist", isbn)));
         bookRepository.deleteById(existingBook.getId());
-        log.info("book with isbn: {} has been completed.", isbn);
+        log.info("book with isbn: {} has been deleted.", isbn);
     }
 
     @Override
