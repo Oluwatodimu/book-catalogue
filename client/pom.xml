@@ -54,8 +54,19 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
+			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>1.9.1</version>
 		</dependency>
 	</dependencies>
 
