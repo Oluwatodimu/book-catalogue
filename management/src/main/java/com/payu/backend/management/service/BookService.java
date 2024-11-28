@@ -21,7 +21,7 @@ public interface BookService {
      * @Parameter: isbn unique to the book
      * @Returns: info regarding the updated book
      * */
-    Book addNewBookToCatalogue(AddBookRequest request);
+    Book addNewBookToCatalogue(Book book);
 
     /**
      * method for updating book in the collection

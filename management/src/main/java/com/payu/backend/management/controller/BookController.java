@@ -1,6 +1,5 @@
 package com.payu.backend.management.controller;
 
-import com.payu.backend.management.data.dto.request.AddBookRequest;
 import com.payu.backend.management.data.dto.request.UpdateBookRequest;
 import com.payu.backend.management.data.dto.response.BaseResponse;
 import com.payu.backend.management.data.entity.Book;
@@ -40,10 +39,10 @@ public class BookController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> addNewBook(@Valid @RequestBody AddBookRequest request) {
-        log.info("adding book with isbn: {} to collection", request.getIsbnNumber());
-        Book book = bookService.addNewBookToCatalogue(request);
-        return new ResponseEntity<>(new BaseResponse("successful", false, book), HttpStatus.CREATED);
+    public ResponseEntity<BaseResponse> addNewBook(@Valid @RequestBody Book book) {
+        log.info("adding book with isbn: {} to collection", book.getIsbnNumber());
+        Book newBook = bookService.addNewBookToCatalogue(book);
+        return new ResponseEntity<>(new BaseResponse("successful", false, newBook), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{isbn}", produces = MediaType.APPLICATION_JSON_VALUE)

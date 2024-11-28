@@ -1,6 +1,6 @@
 package com.payu.web.client.service;
 
-import com.payu.web.client.data.dto.request.AddBookRequest;
+import com.payu.web.client.data.Book;
 import com.payu.web.client.data.dto.request.UpdateBookRequest;
 import com.payu.web.client.data.dto.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +48,7 @@ public class ManagementService {
         }
     }
 
-    public BaseResponse addNewBook(AddBookRequest request) {
+    public BaseResponse addNewBook(Book request) {
         try {
 
             Response response = client.target(baseUrl)

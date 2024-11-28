@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Book Catalogue System</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h2>Book Catalogue System</h2>
+    <hr>
+    <h3>Add New Book</h3>
+
+    <div th:if="${message}" class="alert"
+         th:classappend="${response?.error} ? 'alert-danger' : 'alert-success'"
+         role="alert">
+        <span th:text="${message}"></span>
+    </div>
+
+    <form th:action="@{/save-book}" th:object="${book}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="Book Name" class="form-control mb-4 col-4" required>
+        <input type="text" th:field="*{isbnNumber}" placeholder="Book ISBN Number" class="form-control mb-4 col-4" required>
+        <input type="text" th:field="*{publishDate}" placeholder="Date Published (dd/MM/yyyy)" class="form-control mb-4 col-4" required>
+        <input type="number" th:field="*{price}" placeholder="Book Price" class="form-control mb-4 col-4" required>
+
+        <select th:field="*{bookType}" class="form-control mb-4 col-4" required>
+            <option value="" disabled selected>Select Book Type</option>
+            <option value="HARD_COVER">Hard Cover</option>
+            <option value="SOFT_COVER">Soft Cover</option>
+            <option value="EBOOK">eBook</option>
+            <option value="OTHER">other</option>
+        </select>
+
+        <input type="text" th:field="*{author}" placeholder="Author" class="form-control mb-4 col-4">
+        <input type="number" th:field="*{numberOfPages}" placeholder="Number of Pages" class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2">Save Book</button>
+    </form>
+    <hr>
+
+    <a th:href="@{/}"> Back to Book Catalogue</a>
+</div>
+</body>
+
+</html>

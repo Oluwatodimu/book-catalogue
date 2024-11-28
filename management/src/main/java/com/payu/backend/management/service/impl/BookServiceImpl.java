@@ -32,24 +32,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book addNewBookToCatalogue(AddBookRequest request) {
-        if (bookRepository.existsByIsbnNumber(request.getIsbnNumber())) {
-            throw new BookAlreadyExistsException(String.format("Book with isbn %s already exists", request.getIsbnNumber()));
+    public Book addNewBookToCatalogue(Book book) {
+        if (bookRepository.existsByIsbnNumber(book.getIsbnNumber())) {
+            throw new BookAlreadyExistsException(String.format("Book with isbn %s already exists", book.getIsbnNumber()));
         }
 
-        Book newBook = Book.builder()
-                .name(request.getName().toLowerCase(Locale.ROOT).trim())
-                .isbnNumber(request.getIsbnNumber().trim())
-                .publishDate(DateUtils.convertDateStringToLocalDate(request.getPublishDate()))
-                .price(request.getPrice())
-                .bookType(request.getBookType())
-                .author(request.getAuthor().toLowerCase(Locale.ROOT).trim())
-                .numberOfPages(request.getNumberOfPages())
-                .createdAt(Instant.now())
-                .lastModifiedAt(Instant.now())
-                .build();
-
-        return bookRepository.save(newBook);
+        return bookRepository.save(book);
     }
 
     @Override
@@ -82,7 +70,7 @@ public class BookServiceImpl implements BookService {
         }
 
         if (request.getPublishDate() != null) {
-            existingBook.setPublishDate(DateUtils.convertDateStringToLocalDate(request.getPublishDate()));
+            existingBook.setPublishDate(request.getPublishDate());
         }
 
         if (request.getPrice() != null) {

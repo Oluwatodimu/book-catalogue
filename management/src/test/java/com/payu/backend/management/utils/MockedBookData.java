@@ -37,7 +37,7 @@ public class MockedBookData {
                 .id(15L)
                 .name("clean code")
                 .isbnNumber("0123456789")
-                .publishDate(LocalDate.now())
+                .publishDate("25/11/2006")
                 .price(20.0)
                 .bookType(BookType.HARD_COVER)
                 .author("robert c. martin")

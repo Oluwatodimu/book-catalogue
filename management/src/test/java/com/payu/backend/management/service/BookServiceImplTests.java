@@ -28,10 +28,11 @@ class BookServiceImplTests {
 
     @Test
     public void givenAddBookRequest_WhenAddNewBookToCatalogue_ThenReturnCreatedBook() {
+        Book mockedBook = MockedBookData.createMockDataForBook();
         BDDMockito.given(bookRepository.existsByIsbnNumber(Mockito.anyString())).willReturn(false);
         BDDMockito.given(bookRepository.save(Mockito.any(Book.class))).willReturn(MockedBookData.createMockDataForBook());
 
-        Book newBook = bookServiceImpl.addNewBookToCatalogue(MockedBookData.createMockDataForAddingNewBook());
+        Book newBook = bookServiceImpl.addNewBookToCatalogue(mockedBook);
         Mockito.verify(bookRepository, Mockito.times(1)).existsByIsbnNumber(Mockito.anyString());
         Mockito.verify(bookRepository, Mockito.times(1)).save(Mockito.any(Book.class));
         Assertions.assertEquals(MockedBookData.createMockDataForAddingNewBook().getName(), newBook.getName());
@@ -42,9 +43,7 @@ class BookServiceImplTests {
     @Test
     public void givenAddBookRequestWithExistingIsbn_WhenAddNewBookToCatalogue_ThenReturnException() {
         BDDMockito.given(bookRepository.existsByIsbnNumber(Mockito.anyString())).willReturn(true);
-
-        Assertions.assertThrows(BookAlreadyExistsException.class, () -> bookServiceImpl.addNewBookToCatalogue(MockedBookData.createMockDataForAddingNewBook()));
-
+        Assertions.assertThrows(BookAlreadyExistsException.class, () -> bookServiceImpl.addNewBookToCatalogue(MockedBookData.createMockDataForBook()));
         Mockito.verify(bookRepository, Mockito.times(1)).existsByIsbnNumber(Mockito.anyString());
         Mockito.verify(bookRepository, Mockito.times(0)).save(Mockito.any(Book.class));
     }
