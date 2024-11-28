@@ -1,4 +1,4 @@
-package com.payu.web.client.data.dto.response;
+package com.payu.web.client.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

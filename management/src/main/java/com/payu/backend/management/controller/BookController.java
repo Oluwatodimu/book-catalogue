@@ -1,7 +1,6 @@
 package com.payu.backend.management.controller;
 
-import com.payu.backend.management.data.dto.request.UpdateBookRequest;
-import com.payu.backend.management.data.dto.response.BaseResponse;
+import com.payu.backend.management.data.BaseResponse;
 import com.payu.backend.management.data.entity.Book;
 import com.payu.backend.management.service.BookService;
 import lombok.RequiredArgsConstructor;

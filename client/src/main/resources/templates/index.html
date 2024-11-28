@@ -37,7 +37,10 @@
             <td th:text="${book.bookType}"></td>
             <td th:text="${book.author}"></td>
             <td th:text="${book.numberOfPages}"></td>
-            <td><a th:href="@{/show-form-for-update/{isbn}(isbn=${book.isbnNumber})}" class="btn btn-primary">Update</a></td>
+            <td>
+                <a th:href="@{/show-form-for-update/{isbn}(isbn=${book.isbnNumber})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/delete-book/{isbn}(isbn=${book.isbnNumber})}" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>

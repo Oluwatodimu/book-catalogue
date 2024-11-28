@@ -2,7 +2,7 @@ package com.payu.web.client.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payu.web.client.data.Book;
-import com.payu.web.client.data.dto.response.BaseResponse;
+import com.payu.web.client.data.BaseResponse;
 import com.payu.web.client.service.ManagementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -69,22 +69,23 @@ public class BookClientController {
         if (response.getError()) {
             attributes.addFlashAttribute("message", response.getMessage() != null ?
                     response.getMessage(): "could not save book");
-            return "redirect:/";
+            return "redirect:/show-form-for-update/" + book.getIsbnNumber();
         }
 
         attributes.addFlashAttribute("message", "book successfully updated");
         return "redirect:/";
     }
-//
-//    @GetMapping("/delete-book/{isbn}")
-//    public String deleteBook(@PathVariable(name = "isbn") String isbn, RedirectAttributes attributes) {
-//        Integer statusCode = managementService.deleteCurrentBook(isbn);
-//        if (statusCode != 204) {
-//            attributes.addFlashAttribute("message", "failed to remove book from catalogue");
-//            return "redirect:/view-catalogue";
-//        }
-//
-//        attributes.addFlashAttribute("message", "successfully removed book from catalogue");
-//        return "redirect:/view-catalogue";
-//    }
+
+    @GetMapping("/delete-book/{isbn}")
+    public String deleteBook(@PathVariable(name = "isbn") String isbn, RedirectAttributes attributes) {
+        log.info("deleting book with isbn number: {}", isbn);
+        Integer statusCode = managementService.deleteCurrentBook(isbn);
+        if (statusCode != 204) {
+            attributes.addFlashAttribute("message", "failed to remove book from catalogue");
+            return "redirect:/";
+        }
+
+        attributes.addFlashAttribute("message", "successfully removed book from catalogue");
+        return "redirect:/";
+    }
 }
