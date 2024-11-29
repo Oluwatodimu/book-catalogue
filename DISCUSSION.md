@@ -5,10 +5,8 @@ I hereby certify that I alone worked on the requirements and instructions to bui
 was given. All the work presented in this project is solely my own effort, and I did not collaborate with or seek help
 from anyone else during the development process.
 
-I also certify that I have thoroughly completed the main requirements outlined in the test and, where applicable, 
-addressed the bonus requirements as well.
-
-I have approached this task with complete honesty and integrity, ensuring that all work is original and reflects my 
+I also certify that I have thoroughly completed the main requirements outlined in the test. I have approached this task
+with complete honesty and integrity, ensuring that all work is original and reflects my 
 understanding and skills.
 
 ### Project Functionality Overview
@@ -47,7 +45,7 @@ understanding and skills.
         - Deletes the specified book from the catalog.
 
 2. **In-memory Database:**
-    - Uses an in-memory database (e.g., H2) to store book details.
+    - Uses an in-memory database (H2) to store book details.
     - Ensures data persistence during the application's runtime.
 
 ---

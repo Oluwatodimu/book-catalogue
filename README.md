@@ -1,4 +1,4 @@
-## Test Project For Java Developer Role at PayU
+## Test Project For Java Engineer Role
 
 This repo contains the solution to question for the java developer test, where I built a backend service and
 a UI service, and made them interact using a Jax RS API client.
@@ -14,7 +14,7 @@ My submission is in 4 parts:
 - Ensure Java 8 is installed on your machine.
 - Ensure you have *maven* installed.
 - Ensure you have *docker* installed and running.
-- navigate to the cloned project directory.
+- Navigate to the cloned project directory.
 
 ### Building the fat jar files and docker images
 Since there are two applications, we have to build and dockerize jar files for both of them. These

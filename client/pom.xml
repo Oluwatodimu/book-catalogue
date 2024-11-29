@@ -12,6 +12,7 @@
 	<artifactId>client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>client</name>
+	<packaging>jar</packaging>
 	<description>web client for payu test</description>
 	<url/>
 	<licenses>
