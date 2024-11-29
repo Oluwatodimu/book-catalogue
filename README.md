@@ -3,7 +3,11 @@
 This repo contains the solution to question for the java developer test, where I built a backend service and
 a UI service, and made them interact using a Jax RS API client.
 
-My submission 
+My submission is in 4 parts:
+1. the code repo and the `readme` file for setting up and running the project
+2. the [DISCUSSION.md](https://github.com/Oluwatodimu/book-catalogue/blob/main/DISCUSSION.md)
+3. the postman collection that can be accessed [here](https://www.postman.com/lively-firefly-891824/todimu-workspace/collection/b8na2b2/payu-management-api?action=share&creator=18629385)
+4. the UI, which can be viewed in the browser, using the url `localhost:8090`.
 
 ### Setting up the project
 - Clone the repo.
