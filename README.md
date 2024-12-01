@@ -2,11 +2,10 @@
 
 This repo contains the solution to question for the java developer test.
 
-My submission is in 4 parts:
+My submission is in 3 parts:
 1. the code repo and the `readme` file for setting up and running the project
 2. the [DISCUSSION.md](https://github.com/Oluwatodimu/book-catalogue/blob/main/DISCUSSION.md)
 3. the postman collection that can be accessed [here](https://www.postman.com/lively-firefly-891824/todimu-workspace/collection/b8na2b2/payu-management-api?action=share&creator=18629385)
-4. the UI, which can be viewed in the browser, using the url `localhost:8090`.
 
 ### Running the application
 I have provided two methods to run the application:
