@@ -45,7 +45,7 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book updateBookInCatalogue(Book book) {
         return Optional.ofNullable(bookRepository.findByIsbnNumber(book.getIsbnNumber()))
-                .filter(Optional::isPresent)  // Ensure the book exists
+                .filter(Optional::isPresent)
                 .map(existingBookOptional -> {
                     Book existingBook = existingBookOptional.get();
                     existingBook.setName(book.getName());

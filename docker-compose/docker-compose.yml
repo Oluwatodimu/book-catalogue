@@ -1,6 +1,6 @@
 services:
   backend-server:
-    image: "payu/management-api:v1"
+    image: "todimuisewon/management-api:v1"
     container_name: "management-service"
     ports:
       - "8080:8080"
@@ -14,7 +14,7 @@ services:
       - payu-network
 
   web-client:
-    image: "payu/web-client:v1"
+    image: "todimuisewon/web-client:v1"
     container_name: "web-service"
     ports:
       - "8090:8090"

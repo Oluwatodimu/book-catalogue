@@ -51,7 +51,6 @@ class BookServiceImplTests {
         List<Book> books = new ArrayList<>();
         books.add(MockedBookData.createMockDataForBook());
         BDDMockito.given(bookServiceImpl.listAllBooksInCatalogue()).willReturn(books);
-
         List<Book> booksList = bookServiceImpl.listAllBooksInCatalogue();
         Mockito.verify(bookRepository, Mockito.times(1)).findAll();
         Assertions.assertEquals(1,booksList.size());

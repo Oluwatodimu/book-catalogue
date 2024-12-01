@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payu.web.client.data.dto.BaseResponse;
 import com.payu.web.client.data.dto.Book;
 import com.payu.web.client.data.dto.PaginatedBookList;
-import com.payu.web.client.service.ManagementService;
+import com.payu.web.client.service.ManagementClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BookClientController {
 
     private final ObjectMapper objectMapper;
-    private final ManagementService managementService;
+    private final ManagementClient managementClient;
 
     @GetMapping(path = "/")
     public String listAllBooks(Model model) {
@@ -39,7 +39,7 @@ public class BookClientController {
     @PostMapping(path = "/save-book")
     public String saveNewBook(@ModelAttribute("book") Book book, RedirectAttributes attributes) {
         log.info("saving book with isbn: {}", book.getIsbnNumber());
-        BaseResponse response = managementService.addNewBook(book);
+        BaseResponse response = managementClient.addNewBook(book);
         if (response.getError()) {
             attributes.addFlashAttribute("message", response.getMessage() != null ?
                     response.getMessage(): "could not save book");
@@ -53,7 +53,7 @@ public class BookClientController {
     @GetMapping(path = "/show-form-for-update/{isbn}")
     public String editExistingBook(@PathVariable(name = "isbn") String isbn, Model model) {
         log.info("redirecting to page to update book with isbn number: {}", isbn);
-        BaseResponse response = managementService.findBookByIsbnNumber(isbn);
+        BaseResponse response = managementClient.findBookByIsbnNumber(isbn);
         Book book = objectMapper.convertValue(response.getData(), Book.class);
         model.addAttribute("book", book);
         return "update_book";
@@ -62,7 +62,7 @@ public class BookClientController {
     @PostMapping(path = "/save-edited-book")
     public String saveEditedBook(@ModelAttribute("book") Book book, RedirectAttributes attributes) {
         log.info("saving updated book with isbn: {}", book.getIsbnNumber());
-        BaseResponse response = managementService.editExistingBook(book);
+        BaseResponse response = managementClient.editExistingBook(book);
         if (response.getError()) {
             attributes.addFlashAttribute("message", response.getMessage() != null ?
                     response.getMessage(): "could not save book");
@@ -76,7 +76,7 @@ public class BookClientController {
     @GetMapping("/delete-book/{isbn}")
     public String deleteBook(@PathVariable(name = "isbn") String isbn, RedirectAttributes attributes) {
         log.info("deleting book with isbn number: {}", isbn);
-        Integer statusCode = managementService.deleteCurrentBook(isbn);
+        Integer statusCode = managementClient.deleteCurrentBook(isbn);
         if (statusCode != 204) {
             attributes.addFlashAttribute("message", "failed to remove book from catalogue");
             return "redirect:/";
@@ -88,7 +88,7 @@ public class BookClientController {
     @GetMapping("/page/{page-number}")
     public String getPaginatedList(@PathVariable(name = "page-number") int pageNumber, Model model) {
         log.info("retrieving paginated list of books in catalogue");
-        BaseResponse response = managementService.getPaginatedList(pageNumber);
+        BaseResponse response = managementClient.getPaginatedList(pageNumber);
         PaginatedBookList bookList = objectMapper.convertValue(response.getData(), PaginatedBookList.class);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", bookList.getTotalPages());

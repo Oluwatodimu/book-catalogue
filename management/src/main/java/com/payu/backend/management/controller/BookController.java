@@ -63,7 +63,7 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(path = "/page/{page-number}")
+    @GetMapping(path = "/page/{page-number}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse> getPaginatedList(@PathVariable(name = "page-number") int number) {
         log.info("retrieving paginated book list in the catalogue ...");
         Page<Book> books = bookService.getPaginatedList(number, pageSize);

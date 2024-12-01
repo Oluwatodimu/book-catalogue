@@ -1,8 +1,8 @@
 package com.payu.web.client.service;
 
-import com.payu.web.client.data.dto.Book;
 import com.payu.web.client.data.dto.BaseResponse;
-import lombok.RequiredArgsConstructor;
+import com.payu.web.client.data.dto.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,13 +12,17 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
 @Component
-@RequiredArgsConstructor
-public class ManagementService {
+public class ManagementClient {
 
-    @Value("${management.base-url}")
-    private String baseUrl;
-
+    private final String baseUrl;
     private final Client client;
+
+
+    @Autowired
+    public ManagementClient(@Value("${management.base-url}") String baseUrl, Client client) {
+        this.baseUrl = baseUrl;
+        this.client = client;
+    }
 
     public BaseResponse listAllBooks() {
         try {
