@@ -1,7 +1,6 @@
 ## Test Project For Java Engineer Role
 
-This repo contains the solution to question for the java developer test, where I built a backend service and
-a UI service, and made them interact using a Jax RS API client.
+This repo contains the solution to question for the java developer test.
 
 My submission is in 4 parts:
 1. the code repo and the `readme` file for setting up and running the project
@@ -9,47 +8,44 @@ My submission is in 4 parts:
 3. the postman collection that can be accessed [here](https://www.postman.com/lively-firefly-891824/todimu-workspace/collection/b8na2b2/payu-management-api?action=share&creator=18629385)
 4. the UI, which can be viewed in the browser, using the url `localhost:8090`.
 
-### Setting up the project
-- Clone the repo.
-- Ensure Java 8 is installed on your machine.
-- Ensure you have *maven* installed.
-- Ensure you have *docker* installed and running.
-- Navigate to the cloned project directory.
-
-### Building the fat jar files and docker images
-Since there are two applications, we have to build and dockerize jar files for both of them. These
-jar files will contain all the necessary dependencies to run them.
-
-To build the jar file for the UI spring boot application and dockerize it, the following steps have to be followed:
-1. navigate to the client directory using `cd client`, this should be typed in the cloned project main directory terminal.
-2. run the maven command to package the application into a jar file. This can be achieved using the command
-`mvn clean package`
-3. Once this command runs successfully we have to package the jar file into a docker image, and we can achieve this using the command
-`docker build . -t payu/web-client:v1` (ensure you are in the same directory as the client dockerfile).
-4. navigate back to the main project directory by running the command `cd ..`, once the docker image for the web client has been built
-
-Once this is successfully done, the next thing we have to do is to build and dockerize the jar file for the backend service,
-which can be done by following the steps below:
-1. navigate to the backend server directory using `cd management`, this should be typed in the cloned project main directory terminal.
-2. run the maven command to package the application into a jar file. This can be achieved using the command
-   `mvn clean package`
-3. Once this command runs successfully we have to package the jar file into a docker image, and we can achieve this using the command
-   `docker build . -t payu/management-api:v1` (ensure you are in the same directory as the backend server dockerfile).
-4. navigate back to the main project directory by running the command `cd ..`, once the docker image for the backend server has been built.
-
-After doing this, we can run the application now.
-
 ### Running the application
-- navigate to the docker-compose directory in the cloned project.
-- run the application using the following command `doocker compose up -d`. 
-- once this is done and the containers are running, you can go the browser to view the application at this port `localhost:8090`.
-- to stop the containers you can use the command `docker compose down`.
+I have provided two methods to run the application:
 
-*NB*: You can also run the application by running the jar files directly in their directories. This can be achieved using 
-the command `mvn spring-boot:run`, just start the backend server before the web client. I recommend using the docker approach since 
-we are working with two separate applications interacting with each other, and that is best within the
-same network. Plus also, it is OS agnostic so easier and fast deployment. I also wrote some code to ensure the backend service
-is fine (healthy) before running the web client, making one dependent on the other
+1. Using Maven to package the JAR files and running them.
+2. Using Docker Compose to run the JAR files, which have been built as Docker images and published on Docker Hub.
+
+### Option 1
+
+*dependencies:* install java 8+ and maven
+
+#### Steps to Run the Applications
+1. clone the repo
+2. navigate to the project directory
+
+Running the management (backend) service:
+1. navigate to the `management` directory
+2. build the application with `mvn clean package`
+3. run the application with `mvn spring-boot:run`
+
+Running the management (backend) service:
+1. navigate to the `client` directory
+2. build the application with `mvn clean package`
+3. run the application with `mvn spring-boot:run`
+
+That's it !!!, you can now view the application on the browser at `localhost:8090`
+
+### Option 2
+
+*dependencies:* install and run docker
+
+To use docker, this is super simple:
+1. navigate to the project directory.
+2. navigate to the `docker-compose` directory
+3. run the application with `docker compose up -d`
+
+That's it !!!, you can now view the application on the browser at `localhost:8090`
+
+
 
 ### Testing the backend application APIs
 After you have successfully started the application, you can use this link to take you to the postman collection for viewing and testing the backend APIs

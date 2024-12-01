@@ -52,7 +52,7 @@ public class Book implements Serializable {
     @Enumerated(EnumType.STRING)
     private BookType bookType;
 
-    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-:',().]+$", message = "author contains potentially harmful characters or numbers")
+    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-:',().]*$", message = "author contains potentially harmful characters or numbers")
     private String author;
 
     @Positive(message = "number of pages cannot be less than one")
