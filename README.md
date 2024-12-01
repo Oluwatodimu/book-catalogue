@@ -10,7 +10,7 @@ My submission is in 3 parts:
 ### Running the application
 I have provided two methods to run the application:
 
-1. Using Maven to package the JAR files and running them.
+1. Using Maven to package the application as JAR files and running them.
 2. Using Docker Compose to run the JAR files, which have been built as Docker images and published on Docker Hub.
 
 ### Option 1
@@ -26,7 +26,7 @@ Running the management (backend) service:
 2. build the application with `mvn clean package`
 3. run the application with `mvn spring-boot:run`
 
-Running the management (backend) service:
+Running the client (frontend) service:
 1. navigate to the `client` directory
 2. build the application with `mvn clean package`
 3. run the application with `mvn spring-boot:run`
