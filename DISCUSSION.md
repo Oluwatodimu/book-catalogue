@@ -38,7 +38,7 @@ understanding and skills.
         - HTTP POST `/books` endpoint.
         - Accepts book details in JSON format and adds the book to the catalog.
     - **Update an existing book:**
-        - HTTP PUT `/books}` endpoint.
+        - HTTP PUT `/books` endpoint.
         - Accepts updated book details in JSON format and updates the catalog entry.
     - **Delete a book:**
         - HTTP DELETE `/books/{isbn}` endpoint.
@@ -72,6 +72,13 @@ Allows navigation through pages, improving performance and user experience for l
 4. **Docker Compose for Service Management:** The client service is containerized using Docker and managed with
    Docker Compose. This enables easy service running.
 
+
+5. **Unit Tests:** Added unit tests to cover the integration of the backend service using the jax rs client.
+
+
+6. **Centralized exception handling**.
+
+
 ---
 
 ### Backend (Management Service)
@@ -80,7 +87,8 @@ Docker Compose. This enables easy service running.
 
 
 2. **Input Validation:** Ensures proper validation for all required fields (`Name`, `ISBN`, `Publish Date`, `Price`, `Book Type`),
-rejects invalid or missing inputs with appropriate error messages.
+rejects invalid or missing inputs with appropriate error messages. I added two extra fields `author` and `number of pages` to make the 
+solution look more realistic, but I made the 5 minimum book requirements required.
 
 
 3. **Pagination:** Implemented pagination to allow the client service to request paginated results when getting all books.
@@ -95,8 +103,8 @@ This provides a consistent and centralized approach to error handling across the
 status codes.
 
 
-6. **Audit Columns:** Added audit columns (`createdAt`, `updatedAt`) to track when a book’s details are created or modified.
-Ensures transparency and traceability of changes made to the catalog.
+6. **Audit Columns:** Added audit columns (`createdAt`, `updatedAt`) to track when a book’s details are created or modified,
+ensuring transparency and traceability of changes made to the catalog.
 
 
 7. **Actuator Endpoint for Health Checks:** Exposed a simple actuator endpoint (`/actuator/health`) to monitor the health of the application.
